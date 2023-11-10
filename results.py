@@ -3,7 +3,7 @@ import pandas as pd
 
 
 GAME_RESULTS = '/Users/tarun/Desktop/DS2001_Final/nfl_results.csv'
-# RANDOM COMMENT
+
 def mean_yardsW(df):
     yds_in_win = df['YdsW'].mean()
     return yds_in_win
