@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
-
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 GAME_RESULTS = '/Users/tarun/Desktop/DS2001_Final/nfl_results.csv'
 
@@ -55,9 +57,23 @@ if __name__ == "__main__":
     df = df[0:1427]
 
     years = df_defense1.groupby(['Year'])
-    print(years.get_group(2022)["Yds"])
-    print(years.get_group(2022)["PA"])
+    yds = years.get_group(2022)["Yds"]
+    PA = years.get_group(2022)["PA"]
 
+    df_binary = pd.concat([yds, PA], axis = 1)
+    df_binary = df_binary[0:32]
+    
+    df_binary.columns = ['Yards Allowed', 'Points Allowed']
+    sns.regplot(x = 'Yards Allowed', y = 'Points Allowed', data = df_binary, order = 1, ci = None)
+    #plt.show()
+    
+    graph_info = np.polyfit(df_binary['Yards Allowed'], df_binary['Points Allowed'], 1)
+    corr = np.corrcoef(df_binary['Yards Allowed'], df_binary['Points Allowed'])
+    corr_coeff = corr[0,1]
+    m = graph_info[0]
+    b = graph_info[1]
+    print("The line for linear regression is " + str(m) + "x" + " + " + str(b))
+    print("There is a " + str(round(corr_coeff,4)) + " correlation coefficient.")
 
     # This finds the index where df is not equal to Week and sets df equal to only the indexes where it is
     df = df[df.iloc[:, 0] != 'Week']
