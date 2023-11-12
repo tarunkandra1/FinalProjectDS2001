@@ -6,6 +6,29 @@ import seaborn as sns
 
 GAME_RESULTS = '/Users/tarun/Desktop/DS2001_Final/nfl_results.csv'
 
+def graph_corr(df1, df2, Bool):
+# This function gives you graph of two different pieces of data.
+# If the Boolean is set to true, it will give you the correlation coefficient,
+# If it is set to false, it will return the graph info which is a list containing information about
+# the plot which is found with numpy.
+    df1 = df1[0:32]
+    df2 = df2[0:32]
+    
+    sns.regplot(x = df1, y = df2, order = 1, ci = None)
+    plt.show()
+    
+    graph_info = np.polyfit(df1, df2, 1)
+    if Bool == True:
+        corr = np.corrcoef(df1, df2)
+        corr_coeff = corr[0,1]
+        return corr_coeff
+    m = graph_info[0]
+    b = graph_info[1]
+    print("The line for linear regression is " + str(m) + "x" + " + " + str(b))
+    return graph_info
+
+
+
 def mean_yardsW(df):
     yds_in_win = df['YdsW'].mean()
     return yds_in_win
@@ -60,20 +83,10 @@ if __name__ == "__main__":
     yds = years.get_group(2022)["Yds"]
     PA = years.get_group(2022)["PA"]
 
-    df_binary = pd.concat([yds, PA], axis = 1)
-    df_binary = df_binary[0:32]
     
-    df_binary.columns = ['Yards Allowed', 'Points Allowed']
-    sns.regplot(x = 'Yards Allowed', y = 'Points Allowed', data = df_binary, order = 1, ci = None)
-    #plt.show()
-    
-    graph_info = np.polyfit(df_binary['Yards Allowed'], df_binary['Points Allowed'], 1)
-    corr = np.corrcoef(df_binary['Yards Allowed'], df_binary['Points Allowed'])
-    corr_coeff = corr[0,1]
-    m = graph_info[0]
-    b = graph_info[1]
-    print("The line for linear regression is " + str(m) + "x" + " + " + str(b))
-    print("There is a " + str(round(corr_coeff,4)) + " correlation coefficient.")
+    corr_coeff = graph_corr(yds,PA, True)
+    graph_info = graph_corr(yds, PA, False)
+ 
 
     # This finds the index where df is not equal to Week and sets df equal to only the indexes where it is
     df = df[df.iloc[:, 0] != 'Week']
