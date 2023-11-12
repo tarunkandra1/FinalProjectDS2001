@@ -28,6 +28,24 @@ def graph_corr(df1, df2, Bool):
     return graph_info
 
 
+def team_wins(df, teams):
+    # Finds the amount of wins a team has in a certain dataset, returns a dataframe
+    # The parameters are a dataframe and a dictionary
+
+    group_win = df.groupby(['Winner/tie'])
+    group_loss = df.groupby(['Loser/tie'])
+
+    for i in teams:
+        W = len(group_win.get_group(i))
+        L = len(group_loss.get_group(i))
+        #print(len(group_win.get_group(i)), "Games were won in the last 5 years by the" , i)
+        #print(len(group_loss.get_group(i)), "Games were lost in the last 5 years by the" , i)
+        teams[i] = [W,L]
+    df_teamstats = pd.DataFrame(teams)
+    df_teamstats.rename({0: 'Wins', 1: 'Losses'}, inplace= True)
+    return df_teamstats
+
+
 
 def mean_yardsW(df):
     yds_in_win = df['YdsW'].mean()
@@ -78,18 +96,21 @@ if __name__ == "__main__":
 
     # This is to delete the duplicate, because our csv has a lot of unncessesary data
     df = df[0:1427]
-
+    # This finds the index where df is not equal to Week and sets df equal to only the indexes where it is
+    df = df[df.iloc[:, 0] != 'Week']
+    df['YdsL'] = df['YdsL'].astype(float)
+    df['YdsW'] = df['YdsW'].astype(float)
+    
     years = df_defense1.groupby(['Year'])
     yds = years.get_group(2022)["Yds"]
     PA = years.get_group(2022)["PA"]
 
     
-    corr_coeff = graph_corr(yds,PA, True)
-    graph_info = graph_corr(yds, PA, False)
+    #corr_coeff = graph_corr(yds,PA, True)
+    #graph_info = graph_corr(yds, PA, False)
  
-
-    # This finds the index where df is not equal to Week and sets df equal to only the indexes where it is
-    df = df[df.iloc[:, 0] != 'Week']
+    print(team_wins(df, teams))
+    """
     
     df['YdsL'] = df['YdsL'].astype(float)
     df['YdsW'] = df['YdsW'].astype(float)
@@ -103,3 +124,4 @@ if __name__ == "__main__":
         #print(len(group_win.get_group(i)), "Games were won in the last 5 years by the" , i)
         #print(len(group_loss.get_group(i)), "Games were lost in the last 5 years by the" , i)
         teams[i] = [W,L]
+"""
