@@ -49,17 +49,20 @@ def team_wins(df, teams):
 
 
 def rate_team(df, avg, teams):
-    new_teams = teams
+    new_teams = teams.copy()
     team_name = df['Tm']
-    x = df['Yds']
-    y = avg['Yds']
-    adj_yds = (x / y)
-    x = df['PA']
-    y = avg['PA']
-    adj_PA = x / y
-    x = df['TO%']
-    y = avg['TO%']
-    adj_TO = (x / y)
+    xYds = df['Yds'].iloc[0]
+    yYds = avg['Yds'].iloc[0]
+    adj_yds = (xYds / yYds)
+    
+    xPA = df['PA'].iloc[0]
+    yPA = avg['PA'].iloc[0]
+    adj_PA = xPA / yPA
+
+    xTO = df['TO%'].iloc[0]
+    yTO = avg['TO%'].iloc[0]
+    adj_TO = (xTO / yTO)
+
     rating = (adj_TO + adj_PA + adj_yds) / 3.0
     new_teams.loc['Defensive Rating', team_name] = rating
     return new_teams
@@ -75,7 +78,39 @@ def mean_yardsL(df):
     return yds_in_loss
 
 if __name__ == "__main__":
-
+    nfl_teams = [
+    'Arizona Cardinals',
+    'Atlanta Falcons',
+    'Baltimore Ravens',
+    'Buffalo Bills',
+    'Carolina Panthers',
+    'Chicago Bears',
+    'Cincinnati Bengals',
+    'Cleveland Browns',
+    'Dallas Cowboys',
+    'Denver Broncos',
+    'Detroit Lions',
+    'Green Bay Packers',
+    'Houston Texans',
+    'Indianapolis Colts',
+    'Jacksonville Jaguars',
+    'Kansas City Chiefs',
+    'Las Vegas Raiders',
+    'Los Angeles Chargers',
+    'Los Angeles Rams',
+    'Miami Dolphins',
+    'Minnesota Vikings',
+    'New England Patriots',
+    'New Orleans Saints',
+    'New York Giants',
+    'New York Jets',
+    'Philadelphia Eagles',
+    'Pittsburgh Steelers',
+    'San Francisco 49ers',
+    'Seattle Seahawks',
+    'Tampa Bay Buccaneers',
+    'Tennessee Titans'
+]
     teams_data = {
     'Arizona Cardinals': [0, 0, 0],
     'Atlanta Falcons': [0, 0, 0],
@@ -132,21 +167,13 @@ if __name__ == "__main__":
     year_filt = 2022
     average = years.get_group(year_filt)[32:33]
     new_teams = teams_data
-    skip = 0
     for team, data in teams:
-        data = data[data['Year'] == 2022]         
-        if team == 'Avg Team':
-            skip = 1
-        elif team == 'League Total':
-            skip = 1
-        elif  team == 'Avg Tm/G':
-            skip = 1
-        else:
-            if skip != 1 :
-                defstats = data[data['Year'] == 2022]
-                new_teams = rate_team(defstats ,average, teams_data)
+        data = data[data['Year'] == 2022]        
+        defstats = data[data['Year'] == 2022]
+        new_teams = rate_team(defstats ,average, new_teams)
+    new_teams = new_teams.drop(["League Total", 'Avg Tm/G', 'Avg Team'], axis = 1)
     print(new_teams)
-
+    
 
 
 
