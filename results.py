@@ -42,14 +42,27 @@ def team_wins(df, teams):
         L = len(group_loss.get_group(i))
         #print(len(group_win.get_group(i)), "Games were won in the last 5 years by the" , i)
         #print(len(group_loss.get_group(i)), "Games were lost in the last 5 years by the" , i)
-        teams[i] = [W,L]
+        teams[i] = [W,L,0]
     df_teamstats = pd.DataFrame(teams)
-    df_teamstats.rename({0: 'Wins', 1: 'Losses'}, inplace= True)
+    df_teamstats.rename({0: 'Wins', 1: 'Losses', 2: 'Defensive Rating'}, inplace= True)
     return df_teamstats
 
 
 def rate_team(df, avg, teams):
-    adj_yds = df['Yds']
+    new_teams = teams
+    team_name = df['Tm']
+    x = df['Yds']
+    y = avg['Yds']
+    adj_yds = (x / y)
+    x = df['PA']
+    y = avg['PA']
+    adj_PA = x / y
+    x = df['TO%']
+    y = avg['TO%']
+    adj_TO = (x / y)
+    rating = (adj_TO + adj_PA + adj_yds) / 3.0
+    new_teams.loc['Defensive Rating', team_name] = rating
+    return new_teams
 
 def mean_yardsW(df):
     # Finds the mean yards in a win parameter is a dataframe
@@ -63,7 +76,7 @@ def mean_yardsL(df):
 
 if __name__ == "__main__":
 
-    teams = {
+    teams_data = {
     'Arizona Cardinals': [0, 0, 0],
     'Atlanta Falcons': [0, 0, 0],
     'Baltimore Ravens': [0, 0, 0],
@@ -104,6 +117,10 @@ if __name__ == "__main__":
     df = df[0:1427]
     # This finds the index where df is not equal to Week and sets df equal to only the indexes where it is
     df = df[df.iloc[:, 0] != 'Week']
+
+    teams_data = team_wins(df, teams_data)
+
+
     df['YdsL'] = df['YdsL'].astype(float)
     df['YdsW'] = df['YdsW'].astype(float)
     
@@ -112,14 +129,25 @@ if __name__ == "__main__":
     PA = years.get_group(2022)["PA"]
 
     teams = df_defense1.groupby(['Tm'])
-    year_filt = teams['Year'] == 2022
-    for i in teams:
-        defstats = i[year_filt]
-        print(defstats('Yds'))
+    year_filt = 2022
+    average = years.get_group(year_filt)[32:33]
+    new_teams = teams_data
+    skip = 0
+    for team, data in teams:
+        data = data[data['Year'] == 2022]         
+        if team == 'Avg Team':
+            skip = 1
+        elif team == 'League Total':
+            skip = 1
+        elif  team == 'Avg Tm/G':
+            skip = 1
+        else:
+            if skip != 1 :
+                defstats = data[data['Year'] == 2022]
+                new_teams = rate_team(defstats ,average, teams_data)
+    print(new_teams)
 
 
-
-    #print(team_wins(df, teams))
 
 
 # This is the code which we used to find the graph of total yards correlated to total PA
