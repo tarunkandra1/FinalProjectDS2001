@@ -3,7 +3,10 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 import seaborn as sns
+import warnings
 
+
+warnings.filterwarnings("ignore")
 GAME_RESULTS = '/Users/tarun/Desktop/DS2001_Final/nfl_results.csv'
 
 def graph_corr(df1, df2, Bool):
@@ -44,7 +47,7 @@ def team_wins(df, teams):
         #print(len(group_loss.get_group(i)), "Games were lost in the last 5 years by the" , i)
         teams[i] = [W,L,0]
     df_teamstats = pd.DataFrame(teams)
-    df_teamstats.rename({0: 'Wins', 1: 'Losses', 2: 'Defensive Rating'}, inplace= True)
+    df_teamstats.rename({0: 'Wins', 1: 'Losses', 2: 'Defensive Rating', 3: 'Offensive Rating', 4: 'Net Rating'}, inplace= True)
     return df_teamstats
 
 
@@ -109,40 +112,42 @@ if __name__ == "__main__":
     'San Francisco 49ers',
     'Seattle Seahawks',
     'Tampa Bay Buccaneers',
-    'Tennessee Titans'
+    'Tennessee Titans',
+    'Washington Commanders'
 ]
     teams_data = {
-    'Arizona Cardinals': [0, 0, 0],
-    'Atlanta Falcons': [0, 0, 0],
-    'Baltimore Ravens': [0, 0, 0],
-    'Buffalo Bills': [0, 0, 0],
-    'Carolina Panthers': [ 0, 0, 0],
-    'Chicago Bears': [0, 0, 0],
-    'Cincinnati Bengals': [0, 0, 0],
-    'Cleveland Browns': [0, 0, 0],
-    'Dallas Cowboys': [0, 0, 0],
-    'Denver Broncos': [0, 0, 0],
-    'Detroit Lions': [0, 0, 0],
-    'Green Bay Packers': [0, 0, 0],
-    'Houston Texans': [0, 0, 0],
-    'Indianapolis Colts': [0, 0, 0],
-    'Jacksonville Jaguars': [0, 0, 0],
-    'Kansas City Chiefs': [0, 0, 0],
-    'Las Vegas Raiders': [0, 0, 0],
-    'Los Angeles Chargers': [0, 0, 0],
-    'Los Angeles Rams': [0, 0, 0],
-    'Miami Dolphins': [0, 0, 0],
-    'Minnesota Vikings': [0, 0, 0],
-    'New England Patriots': [0, 0, 0],
-    'New Orleans Saints': [0, 0, 0],
-    'New York Giants': [0, 0, 0],
-    'New York Jets': [0, 0, 0],
-    'Philadelphia Eagles': [0, 0, 0],
-    'Pittsburgh Steelers': [0, 0, 0],
-    'San Francisco 49ers': [0, 0, 0],
-    'Seattle Seahawks': [0, 0, 0],
-    'Tampa Bay Buccaneers': [0, 0, 0],
-    'Tennessee Titans': [0, 0, 0],
+    'Arizona Cardinals': [0, 0, 0, 0, 0],
+    'Atlanta Falcons': [0, 0, 0, 0, 0],
+    'Baltimore Ravens': [0, 0, 0, 0, 0],
+    'Buffalo Bills': [0, 0, 0, 0, 0],
+    'Carolina Panthers': [ 0, 0, 0, 0, 0],
+    'Chicago Bears': [0, 0, 0, 0, 0],
+    'Cincinnati Bengals': [0, 0, 0, 0, 0],
+    'Cleveland Browns': [0, 0, 0, 0, 0],
+    'Dallas Cowboys': [0, 0, 0, 0, 0],
+    'Denver Broncos': [0, 0, 0, 0, 0],
+    'Detroit Lions': [0, 0, 0, 0, 0],
+    'Green Bay Packers': [0, 0, 0, 0, 0],
+    'Houston Texans': [0, 0, 0, 0, 0],
+    'Indianapolis Colts': [0, 0, 0, 0, 0],
+    'Jacksonville Jaguars': [0, 0, 0, 0, 0],
+    'Kansas City Chiefs': [0, 0, 0, 0, 0],
+    'Las Vegas Raiders': [0, 0, 0, 0, 0],
+    'Los Angeles Chargers': [0, 0, 0, 0, 0],
+    'Los Angeles Rams': [0, 0, 0, 0, 0],
+    'Miami Dolphins': [0, 0, 0, 0, 0],
+    'Minnesota Vikings': [0, 0, 0, 0, 0],
+    'New England Patriots': [0, 0, 0, 0, 0],
+    'New Orleans Saints': [0, 0, 0, 0, 0],
+    'New York Giants': [0, 0, 0, 0, 0],
+    'New York Jets': [0, 0, 0, 0, 0],
+    'Philadelphia Eagles': [0, 0, 0, 0 ,0],
+    'Pittsburgh Steelers': [0, 0, 0, 0, 0],
+    'San Francisco 49ers': [0, 0, 0, 0, 0],
+    'Seattle Seahawks': [0, 0, 0, 0, 0],
+    'Tampa Bay Buccaneers': [0, 0, 0, 0, 0],
+    'Tennessee Titans': [0, 0, 0, 0, 0],
+    'Washington Commanders': [0, 0, 0, 0, 0]
 }
 
     df = pd.read_csv('/Users/tarun/Desktop/DS2001_Final/nfl_results.csv')
@@ -163,13 +168,13 @@ if __name__ == "__main__":
     yds = years.get_group(2022)["Yds"]
     PA = years.get_group(2022)["PA"]
 
-    teams = df_defense1.groupby(['Tm'])
-    year_filt = 2022
-    average = years.get_group(year_filt)[32:33]
+    teams_def = df_defense1.groupby(['Tm'])
+    year = 2022
+    average = years.get_group(year)[32:33]
     new_teams = teams_data
-    for team, data in teams:
-        data = data[data['Year'] == 2022]        
-        defstats = data[data['Year'] == 2022]
+    for team, data in teams_def:
+        data = data[data['Year'] == year]        
+        defstats = data[data['Year'] == year]
         new_teams = rate_team(defstats ,average, new_teams)
     new_teams = new_teams.drop(["League Total", 'Avg Tm/G', 'Avg Team'], axis = 1)
     print(new_teams)
