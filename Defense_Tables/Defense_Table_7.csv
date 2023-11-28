@@ -31,6 +31,9 @@ Rk,Tm,G,Pnt,Yds,Y/P,Blck,Year
 30,Houston Texans,17,73,3458,47.4,0,2022
 31,Tennessee Titans,17,84,3789,45.1,0,2022
 32,Denver Broncos,17,85,4374,51.5,0,2022
+,Avg Team,,68.8,3213.4,46.7,0.4,2022
+,League Total,,2200,102829,46.7,12,2022
+,Avg Tm/G,,4.1,189.7,46.7,0.0,2022
 1,Kansas City Chiefs,17,52,2502,48.1,0,2021
 2,Los Angeles Chargers,17,46,2104,45.7,0,2021
 3,Los Angeles Rams,17,62,2858,46.1,0,2021
@@ -63,6 +66,9 @@ Rk,Tm,G,Pnt,Yds,Y/P,Blck,Year
 30,Seattle Seahawks,17,68,3124,45.9,0,2021
 31,New Orleans Saints,17,80,3644,45.6,1,2021
 32,Houston Texans,17,57,2513,44.1,0,2021
+,Avg Team,,64.9,2960.4,45.6,0.4,2021
+,League Total,,2077,94734,45.6,12,2021
+,Avg Tm/G,,3.8,174.1,45.6,0.0,2021
 1,Buffalo Bills,16,63,2896,46.0,0,2020
 2,Las Vegas Raiders,16,48,2192,45.7,0,2020
 3,Carolina Panthers,16,51,2233,43.8,0,2020
@@ -95,6 +101,9 @@ Rk,Tm,G,Pnt,Yds,Y/P,Blck,Year
 30,Philadelphia Eagles,16,71,3271,46.1,0,2020
 31,Pittsburgh Steelers,16,81,3701,45.7,0,2020
 32,New York Jets,16,54,2272,42.1,2,2020
+,Avg Team,,59.4,2710.1,45.6,0.4,2020
+,League Total,,1901,86722,45.6,13,2020
+,Avg Tm/G,,3.7,169.4,45.6,0.0,2020
 1,Baltimore Ravens,16,64,2990,46.7,0,2019
 2,Los Angeles Chargers,16,60,2663,44.4,0,2019
 3,Kansas City Chiefs,16,58,2539,43.8,0,2019
@@ -127,35 +136,6 @@ Rk,Tm,G,Pnt,Yds,Y/P,Blck,Year
 30,Buffalo Bills,16,84,3751,44.7,0,2019
 31,Chicago Bears,16,75,3443,45.9,0,2019
 32,New York Jets,16,82,3534,43.1,1,2019
-1,New Orleans Saints,16,53,2246,42.4,2,2018
-2,Los Angeles Rams,16,66,2913,44.1,2,2018
-3,Kansas City Chiefs,16,52,2278,43.8,1,2018
-4,Indianapolis Colts,16,67,3022,45.1,0,2018
-5,Tampa Bay Buccaneers,16,70,3347,47.8,0,2018
-6,Dallas Cowboys,16,64,2856,44.6,0,2018
-7,Carolina Panthers,16,64,2928,45.8,0,2018
-8,Philadelphia Eagles,16,65,2999,46.1,0,2018
-9,Baltimore Ravens,16,88,3850,43.8,0,2018
-10,Los Angeles Chargers,16,67,3195,47.7,0,2018
-11,Atlanta Falcons,16,61,2811,46.1,1,2018
-12,Pittsburgh Steelers,16,82,3610,44.0,1,2018
-13,New England Patriots,16,71,2898,40.8,2,2018
-14,Chicago Bears,16,78,3447,44.2,0,2018
-15,San Francisco 49ers,16,78,3379,43.3,0,2018
-16,Las Vegas Raiders,16,60,2851,47.5,0,2018
-17,New York Giants,16,66,3071,46.5,0,2018
-18,Green Bay Packers,16,72,3258,45.3,1,2018
-19,Cincinnati Bengals,16,54,2284,42.3,1,2018
-20,Houston Texans,16,80,3732,46.7,1,2018
-21,Detroit Lions,16,68,3078,45.3,0,2018
-22,Minnesota Vikings,16,76,3431,45.1,0,2018
-23,Tennessee Titans,16,71,3276,46.1,0,2018
-24,Washington Commanders,16,58,2660,45.9,0,2018
-25,Seattle Seahawks,16,66,2961,44.9,0,2018
-26,New York Jets,16,79,3410,43.2,1,2018
-27,Buffalo Bills,16,80,3555,44.4,0,2018
-28,Denver Broncos,16,73,3347,45.8,1,2018
-29,Jacksonville Jaguars,16,79,3792,48.0,0,2018
-30,Cleveland Browns,16,71,3093,43.6,0,2018
-31,Miami Dolphins,16,55,2326,42.3,1,2018
-32,Arizona Cardinals,16,80,3638,45.5,1,2018
+,Avg Team,,67.5,3050.3,45.2,0.3,2019
+,League Total,,2159,97611,45.2,11,2019
+,Avg Tm/G,,4.2,190.6,45.2,0.0,2019

@@ -86,7 +86,7 @@ def nfl_games():
         sleep(randint(10, 25))
 
     print("Complete NFL last 5 Year Game Results")
-    return replace_team_names(output_path)
+    return output_path
 
 def nfl_games_current():
     output_folder = 'NFL_Games'
@@ -104,7 +104,7 @@ def nfl_games_current():
     sleep(randint(10, 25))
 
     print("Complete NFL Current Year Game Results")
-    return replace_team_names(output_path)
+    return output_path
 
 def nfl_offense():
     output_folder = 'Offense_Tables'
@@ -134,8 +134,9 @@ def nfl_offense():
             dfs = pd.read_html(page_source, header=1)
 
             for i in range(len(dfs)):
-
-                dfs[i] = dfs[i][~(dfs[i].iloc[:, 0].isna() | (dfs[i].iloc[:, 0] == "Rk"))]
+                
+                dfs[i] = dfs[i][~(dfs[i].iloc[:, 1].isna() | (dfs[i].iloc[:, 0] == "Rk"))]
+                
                 if i == 6:
                     correct_header = ["Rk", "Tm", "G", "Cmp", "Att", "Cmp%",
                                       "Yds", "TD", "TD%", "Int", "Int%", "Lng",
@@ -197,7 +198,7 @@ def nfl_offense():
         driver.quit()
 
     print("Complete NFL Last 5 Year Offensive Stats")
-    return [replace_team_names(file) for file in csv_filenames]
+    return csv_filenames
 
 def nfl_offense_current():
     output_folder = 'Offense_Tables_Current'
@@ -227,7 +228,8 @@ def nfl_offense_current():
 
         for i in range(4, len(dfs)):
 
-            dfs[i] = dfs[i][~(dfs[i].iloc[:, 0].isna() | (dfs[i].iloc[:, 0] == "Rk"))]
+            dfs[i] = dfs[i][~(dfs[i].iloc[:, 1].isna() | (dfs[i].iloc[:, 0] == "Rk"))]
+            
             if i == 5:
                 correct_header = ["Rk", "Tm", "G", "Cmp", "Att", "Cmp%",
                                   "Yds", "TD", "TD%", "Int", "Int%", "Lng",
@@ -281,7 +283,7 @@ def nfl_offense_current():
         driver.quit()
 
     print("Complete NFL Current Year Offensive Stats")
-    return [replace_team_names(file) for file in csv_filenames]
+    return csv_filenames
 
 def nfl_defense():
     output_folder = 'Defense_Tables'
@@ -311,8 +313,8 @@ def nfl_defense():
             dfs = pd.read_html(page_source, header=1)
             
             for i in range(0,len(dfs)):
-            
-                dfs[i] = dfs[i][~(dfs[i].iloc[:, 0].isna() | (dfs[i].iloc[:, 0] == "Rk"))]
+               
+                dfs[i] = dfs[i][~(dfs[i].iloc[:, 1].isna() | (dfs[i].iloc[:, 0] == "Rk"))]
                 dfs[i] = dfs[i][~dfs[i].iloc[:, 0].str.startswith("Tm", na=False)]
       
                 if i == 1:
@@ -377,7 +379,7 @@ def nfl_defense():
         driver.quit()
 
     print("Complete NFL Last 5 Year Defensive Stats")
-    return [replace_team_names(file) for file in csv_filenames]
+    return csv_filenames
 
 def nfl_defense_current():
     
@@ -409,7 +411,7 @@ def nfl_defense_current():
             
             for i in range(0,len(dfs)):
             
-                dfs[i] = dfs[i][~(dfs[i].iloc[:, 0].isna() | (dfs[i].iloc[:, 0] == "Rk"))]
+                dfs[i] = dfs[i][~(dfs[i].iloc[:, 1].isna() | (dfs[i].iloc[:, 0] == "Rk"))]
                 dfs[i] = dfs[i][~dfs[i].iloc[:, 0].str.startswith("Tm", na=False)]
       
                 if i == 1:
@@ -474,7 +476,7 @@ def nfl_defense_current():
         driver.quit()
 
     print("Complete NFL Current Year Defensive Stats")
-    return [replace_team_names(file) for file in csv_filenames]
+    return csv_filenames
 
 if __name__ == "__main__":
     

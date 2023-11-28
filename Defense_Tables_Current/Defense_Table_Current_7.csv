@@ -1,33 +1,36 @@
 Rk,Tm,G,Pnt,Yds,Y/P,Blck,Year
-1,Buffalo Bills,11,44,2132,48.5,0,2023
-2,Philadelphia Eagles,10,38,1804,47.5,0,2023
-3,Miami Dolphins,10,40,1953,48.8,0,2023
-4,Dallas Cowboys,11,49,2263,46.2,1,2023
-5,Detroit Lions,11,43,2096,48.7,0,2023
-6,Minnesota Vikings,11,44,2074,47.1,0,2023
-7,Kansas City Chiefs,10,49,2263,46.2,0,2023
-8,San Francisco 49ers,11,43,2092,48.7,0,2023
-9,Denver Broncos,10,23,1121,48.7,0,2023
-10,Jacksonville Jaguars,10,44,2027,46.1,0,2023
-11,Chicago Bears,11,37,1733,46.8,0,2023
-12,Los Angeles Rams,10,36,1699,47.2,0,2023
-13,Houston Texans,10,40,1898,47.5,0,2023
-14,Los Angeles Chargers,10,36,1804,50.1,0,2023
-15,Tennessee Titans,10,40,1846,46.2,0,2023
-16,Arizona Cardinals,11,40,1947,48.7,0,2023
-17,Las Vegas Raiders,11,36,1695,47.1,0,2023
-18,Atlanta Falcons,10,47,2246,47.8,0,2023
-19,Seattle Seahawks,11,43,2070,48.1,0,2023
-20,Indianapolis Colts,10,40,1902,47.6,0,2023
-21,Tampa Bay Buccaneers,10,36,1737,48.3,0,2023
-22,Green Bay Packers,11,40,1812,45.3,0,2023
-23,Carolina Panthers,10,44,2122,48.2,0,2023
-24,Baltimore Ravens,11,55,2531,46.0,0,2023
-25,Cincinnati Bengals,10,38,1810,47.6,0,2023
-26,New Orleans Saints,10,47,2114,45.0,0,2023
-27,New England Patriots,10,40,1937,48.4,0,2023
-28,Washington Commanders,12,48,2334,48.6,0,2023
-29,Cleveland Browns,10,68,3261,48.0,0,2023
-30,New York Jets,10,51,2248,44.1,0,2023
-31,Pittsburgh Steelers,10,43,1971,45.8,1,2023
-32,New York Giants,11,48,2373,49.4,0,2023
+1,Miami Dolphins,11,46,2270,49.3,0,2023
+2,Dallas Cowboys,11,49,2263,46.2,1,2023
+3,Detroit Lions,11,43,2096,48.7,0,2023
+4,Buffalo Bills,12,49,2401,49.0,0,2023
+5,Minnesota Vikings,11,44,2074,47.1,0,2023
+6,Philadelphia Eagles,11,42,1975,47.0,0,2023
+7,San Francisco 49ers,11,43,2092,48.7,0,2023
+8,Kansas City Chiefs,11,52,2380,45.8,0,2023
+9,Chicago Bears,11,37,1733,46.8,0,2023
+10,Jacksonville Jaguars,11,48,2219,46.2,0,2023
+11,Los Angeles Rams,11,41,1927,47.0,0,2023
+12,Los Angeles Chargers,11,39,1925,49.4,0,2023
+13,Denver Broncos,11,26,1302,50.1,0,2023
+14,Seattle Seahawks,11,43,2070,48.1,0,2023
+15,Houston Texans,11,42,1975,47.0,0,2023
+16,Green Bay Packers,11,40,1812,45.3,0,2023
+17,Las Vegas Raiders,12,40,1906,47.7,0,2023
+18,Atlanta Falcons,11,48,2292,47.8,0,2023
+19,Indianapolis Colts,11,44,2110,48.0,0,2023
+20,Arizona Cardinals,12,42,2020,48.1,0,2023
+21,Tampa Bay Buccaneers,11,38,1831,48.2,0,2023
+22,Tennessee Titans,11,46,2128,46.3,0,2023
+23,Baltimore Ravens,12,58,2687,46.3,0,2023
+24,New Orleans Saints,11,49,2205,45.0,0,2023
+25,Washington Commanders,12,48,2334,48.6,0,2023
+26,Carolina Panthers,11,51,2498,49.0,0,2023
+27,Cincinnati Bengals,11,42,1982,47.2,0,2023
+28,Cleveland Browns,11,73,3487,47.8,0,2023
+29,New England Patriots,11,48,2300,47.9,0,2023
+30,Pittsburgh Steelers,11,49,2222,45.3,1,2023
+31,New York Jets,11,52,2288,44.0,0,2023
+32,New York Giants,12,54,2643,48.9,0,2023
+,Avg Team,,45.8,2170.2,47.4,0.1,2023
+,League Total,,1466,69447,47.4,2,2023
+,Avg Tm/G,,4.1,194.0,47.4,0.0,2023
