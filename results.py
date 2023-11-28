@@ -51,24 +51,53 @@ def team_wins(df, teams):
     return df_teamstats
 
 
-def rate_team(df, avg, teams):
+def rate_teamD(defdf, avg, teams):
+    new_teams = teams.copy()
+    team_name = defdf['Tm']
+    xYds = defdf['Yds'].iloc[0]
+    yYds = avg['Yds'].iloc[0]
+    adj_yds = (xYds / yYds)
+    
+    xPA = defdf['PA'].iloc[0]
+    yPA = avg['PA'].iloc[0]
+    adj_PA = xPA / yPA
+
+    xTO = defdf['TO%'].iloc[0]
+    yTO = avg['TO%'].iloc[0]
+    adj_TO = (xTO / yTO)
+
+    Drating = (adj_TO + adj_PA + adj_yds) / 3.0
+    new_teams.loc['Defensive Rating', team_name] = Drating
+    return new_teams
+
+def rate_teamO(df, avg, teams):
     new_teams = teams.copy()
     team_name = df['Tm']
     xYds = df['Yds'].iloc[0]
     yYds = avg['Yds'].iloc[0]
     adj_yds = (xYds / yYds)
     
-    xPA = df['PA'].iloc[0]
-    yPA = avg['PA'].iloc[0]
-    adj_PA = xPA / yPA
+    xPF = df['PF'].iloc[0]
+    yPF = avg['PF'].iloc[0]
+    adj_PF = xPF / yPF
 
     xTO = df['TO%'].iloc[0]
     yTO = avg['TO%'].iloc[0]
     adj_TO = (xTO / yTO)
 
-    rating = (adj_TO + adj_PA + adj_yds) / 3.0
-    new_teams.loc['Defensive Rating', team_name] = rating
+    Orating = ((adj_PF + adj_yds) / 2.0) / (adj_TO ** 0.33)
+    new_teams.loc['Offensive Rating', team_name] = Orating
     return new_teams
+
+def net_rating(df):
+    for team in df.columns:
+        def_rating = df[team].loc['Defensive Rating']
+        off_rating = df[team].loc['Offensive Rating']
+        net_rating = (def_rating + off_rating) / 2
+        df.loc['Net Rating', team] = net_rating
+    return df
+
+
 
 def mean_yardsW(df):
     # Finds the mean yards in a win parameter is a dataframe
@@ -152,6 +181,7 @@ if __name__ == "__main__":
 
     df = pd.read_csv('/Users/tarun/Desktop/DS2001_Final/nfl_results.csv')
     df_defense1 = pd.read_csv('/Users/tarun/Desktop/DS2001_Final/defensive_stats1.csv')
+    df_offense1 = pd.read_csv('/Users/tarun/Documents/GitHub/FinalProjectDS2001/Offense_Tables/Offense_Table_1.csv')
 
     # This is to delete the duplicate, because our csv has a lot of unncessesary data
     df = df[0:1427]
@@ -164,23 +194,46 @@ if __name__ == "__main__":
     df['YdsL'] = df['YdsL'].astype(float)
     df['YdsW'] = df['YdsW'].astype(float)
     
-    years = df_defense1.groupby(['Year'])
-    yds = years.get_group(2022)["Yds"]
-    PA = years.get_group(2022)["PA"]
+    yearsD = df_defense1.groupby(['Year'])
+    yearsO = df_offense1.groupby(['Year'])
+
+    ydsD = yearsD.get_group(2022)["Yds"]
+    PA = yearsD.get_group(2022)["PA"]
+
+
+    ydsD = yearsO.get_group(2022)["Yds"]
+    PF = yearsO.get_group(2022)["PF"]
+    year = 2021
 
     teams_def = df_defense1.groupby(['Tm'])
-    year = 2022
-    average = years.get_group(year)[32:33]
+    average = yearsD.get_group(year)[32:33]
     new_teams = teams_data
     for team, data in teams_def:
         data = data[data['Year'] == year]        
         defstats = data[data['Year'] == year]
-        new_teams = rate_team(defstats ,average, new_teams)
+        new_teams = rate_teamD(defstats ,average, new_teams)
     new_teams = new_teams.drop(["League Total", 'Avg Tm/G', 'Avg Team'], axis = 1)
-    print(new_teams)
+
+
+    offense_row = [0] * len(new_teams.columns)
+    new_teams.loc[len(new_teams)] = offense_row
+    new_teams = new_teams.rename(index = {3: 'Offensive Rating'})
+
+
+    teams_off = df_offense1.groupby(['Tm'])
+    averageOffense = yearsO.get_group(year)[32:33]
+    for team, data in teams_off:
+        data = data[data['Year'] == year]
+        offstats = data[data['Year'] == year]
+        new_teams = rate_teamO(offstats, averageOffense, new_teams)
+    new_teams = new_teams.drop(["League Total", 'Avg Tm/G', 'Avg Team'], axis = 1)
     
+    net_row = [0] * len(new_teams.columns)
+    new_teams.loc[len(new_teams)] = net_row
+    new_teams = new_teams.rename(index = {4: 'Net Rating'})
 
-
+    new_teams = net_rating(new_teams)
+    print(new_teams.transpose())
 
 # This is the code which we used to find the graph of total yards correlated to total PA
 """
