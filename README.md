@@ -26,9 +26,3 @@ The project is structured around several key functions that perform specific tas
 
 6. **Mean Yards Calculation**:
    - The `mean_yardsW` and `mean_yardsL` functions calculate the mean yards gained in wins and losses, respectively.
-
-## Usage
-To run the analysis, ensure you have the required CSV files (`nfl_results.csv`, `defensive_stats1.csv`, `Offense_Table_1.csv`) in the specified directory. Then, execute the script:
-
-```bash
-python nfl_analysis.py
